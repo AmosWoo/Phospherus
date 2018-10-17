@@ -16,15 +16,15 @@
 
 /*-- Python --*/
 def (self, nums, sum):
-	"""
-	:type nums: List[int]
-	:type sum: int
-	:rtype: List[int]
-	"""
-	dict = {};
-	length = len(nums);
-	for i in range(length):
-		diff = target - nums[i];
-		if diff in dict:
-			return [dict[diff], i];
-		dict[nums[i]] = i;
+    """
+    :type nums: List[int]
+    :type sum: int
+    :rtype: List[int]
+    """
+    dict = {};
+    length = len(nums);
+    for i in range(length):
+        diff = target - nums[i];
+        if diff in dict:
+            return [dict[diff], i];
+        dict[nums[i]] = i;
