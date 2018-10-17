@@ -1,0 +1,30 @@
+给定一个整数数组和一个目标值，找出数组中和为目标值的两个数。
+
+思考：
+    1. 数组大小？
+    2. 数组是否有序？
+    3. 元素可以是正整数、负整数、零？
+    4. 是否存在重复元素？
+   
+需求：
+    输入： 一个整数数组和一个特定数字
+    输出： 长度为2的整数数组，元素为输入数组特定元素的下标
+
+示例: 
+    输入： [5, -5, 2, 15, 18, 0, 9], 20
+    输出： [0,3]
+
+/*-- Python --*/
+def (self, nums, sum):
+	"""
+	:type nums: List[int]
+	:type sum: int
+	:rtype: List[int]
+	"""
+	dict = {};
+	length = len(nums);
+	for i in range(length):
+		diff = target - nums[i];
+		if diff in dict:
+			return [dict[diff], i];
+		dict[nums[i]] = i;
