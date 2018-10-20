@@ -14,6 +14,8 @@
     输入： [5, -5, 2, 15, 18, 0, 9], 20
     输出： [0,3]
 
+Note: The C++ solution has the best time complexity and time consumption
+
 /*-- Python --*/
 def (self, nums, sum):
     """
@@ -28,3 +30,71 @@ def (self, nums, sum):
         if diff in dict:
             return [dict[diff], i];
         dict[nums[i]] = i;
+
+/*-- C --*/
+timeSpend o(n*n)
+int* twoSum(int* nums, int numsSize, int target) {
+    // nums's copy
+    int *numsCopyPtr = (int *)malloc(sizeof(int)*(numsSize+1));
+    if (NULL == numsCopyPtr)
+        return NULL;
+    
+    for (int i=0; i<numsSize; i++)
+        numsCopyPtr[i] = nums[i];
+    numsCopyPtr[numsSize] = '\0';
+    
+    // found the two nums and identity
+    int found = 0;
+    for (int j=0; j<numsSize-1; j++)
+    {
+        for (int k=j+1; k<numsSize; k++) 
+        {
+            if (target == numsCopyPtr[j] + numsCopyPtr[k])
+            {
+                found = 1;
+                // re-write orignal array
+                nums[0] = j;
+                nums[1] = k;
+                nums[2] = '\0';
+                break;
+            }
+        }
+        if (1 == found)
+            break;
+    }
+    
+    // free memory
+    if (NULL != numsCopyPtr)
+    {
+        free(numsCopyPtr);
+        numsCopyPtr = NULL;
+    }
+
+    return nums;
+}
+
+/*-- C++ --*/
+timeSpend O(n) 
+vector<int> twoSum(vector<int>& nums, int target) {
+	vector<int> returnVec;
+	map<int, int> valueToIndex;
+			
+	int diff = 0;
+	for (vector<int>::iterator iterVec=nums.begin(); iterVec!=nums.end(); iterVec++)
+	{
+		diff = target - *iterVec;
+		map<int, int>::iterator iterMap = valueToIndex.find(diff);
+		if (iterMap != valueToIndex.end())
+		{
+			returnVec.push_back(iterMap->second);
+			returnVec.push_back(iterVec-nums.begin());
+			return returnVec;
+		}
+		else
+		{
+			valueToIndex.insert(pair<int, int>(*iterVec, iterVec-nums.begin()));
+		}
+	}
+	
+	return returnVec;
+}
